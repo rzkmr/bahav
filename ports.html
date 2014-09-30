@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8"/>
+
+    <title>Basic shapes</title>
+
+    <link rel="stylesheet" type="text/css" href="css/joint.css" />
+
+    <style>
+      #myholder {
+        /*background-color: #ddd;*/
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="paper-link"></div>
+    <div id="paper-link-out"></div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/joint/joint.js"></script>
+    <script src="js/joint/plugins/joint.shapes.devs.js"></script>
+    <script type="text/javascript">
+
+      var graph = new joint.dia.Graph;
+      var paper = new joint.dia.Paper({ 
+                  el: $('#paper-link'), 
+                  width: 650, 
+                  height: 200, 
+                  gridSize: 1, 
+                  model: graph,
+                  defaultLink: new joint.dia.Link({
+                      attrs: { '.marker-target': { d: 'M 10 0 L 0 5 L 10 10 z' } }
+                  }),
+                  validateConnection: function(cellViewS, magnetS, cellViewT, magnetT, end, linkView) {
+                      // Prevent linking from input ports.
+                      if (magnetS && magnetS.getAttribute('type') === 'input') return false;
+                      // Prevent linking from output ports to input ports within one element.
+                      if (cellViewS === cellViewT) return false;
+                      // Prevent linking to input ports.
+                      return magnetT && magnetT.getAttribute('type') === 'input';
+                  },
+                  validateMagnet: function(cellView, magnet) {
+                      // Note that this is the default behaviour. Just showing it here for reference.
+                      // Disable linking interaction for magnets marked as passive (see below `.inPorts circle`).
+                      return magnet.getAttribute('magnet') !== 'passive';
+                  }
+                });
+
+      var m1 = new joint.shapes.devs.Model({
+          position: { x: 50, y: 50 },
+          size: { width: 90, height: 90 },
+          inPorts: ['in1','in2'],
+          outPorts: ['out'],
+          attrs: {
+              '.label': { text: 'Model', 'ref-x': .4, 'ref-y': .2 },
+              rect: { fill: '#2ECC71' },
+              '.inPorts circle': { fill: '#16A085' },
+              '.outPorts circle': { fill: '#E74C3C' }
+          }
+      });
+      graph.addCell(m1);
+
+      var m2 = m1.clone();
+      m2.translate(300, 0);
+      graph.addCell(m2);
+
+      // var m3 = m1.clone();
+      // m3.translate(160, 60);
+      // graph.addCell(m3);
+
+      graph.on('change:source change:target', function(link) {
+          var sourcePort = link.get('source').port;
+          var sourceId = link.get('source').id;
+          var targetPort = link.get('target').port;
+          var targetId = link.get('target').id;
+
+          var m = [
+              'The port <b>' + sourcePort,
+              '</b> of element with ID <b>' + sourceId,
+              '</b> is connected to port <b>' + targetPort,
+              '</b> of elemnt with ID <b>' + targetId + '</b>'
+          ].join('');
+          
+          out(m);
+      });
+
+      function out(m) {
+          $('#paper-link-out').html(m);
+      }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,273 @@
+.container-fliud{
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+.components {
+	list-style: none;
+}
+.component{
+	height: 70px;
+	width: 48%;
+	margin: 2px 3px 2px 0;
+}
+.component .element {
+	position: relative;
+	top: 50%;
+	padding: 5px;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.element {
+	cursor: move;
+}
+/*#board{
+	position: relative;
+	overflow: hidden;
+}
+#board svg{
+	height: 800px;
+	border: 1px solid #eee;
+}
+
+#paper {
+   position: relative;
+   border: 1px solid gray;
+   display: inline-block;
+   background: transparent;
+   overflow: hidden;
+}
+#paper svg {
+   background: transparent;
+}
+#paper svg .link {
+   z-index: 2;
+}
+.html-element {
+   position: absolute;
+   background: #3498DB;
+   
+   pointer-events: none;
+   -webkit-user-select: none;
+   border-radius: 4px;
+   border: 2px solid #2980B9;
+   box-shadow: inset 0 0 5px black, 2px 2px 1px gray;
+   padding: 5px;
+   box-sizing: border-box;
+   z-index: 2;
+}
+.html-element select,
+.html-element input,
+.html-element button {
+   /* Enable interacting with inputs only. *
+   pointer-events: auto;   
+}
+.html-element button.delete {
+   color: white;
+   border: none;
+   background-color: #C0392B;
+   border-radius: 20px;
+   width: 15px;
+   height: 15px;
+   line-height: 15px;
+   text-align: middle;
+   position: absolute;
+   top: -15px;
+   left: -15px;
+   padding: 0;
+   margin: 0;
+   font-weight: bold;
+   cursor: pointer;
+}
+.html-element button.delete:hover {
+   width: 20px;
+   height: 20px;
+   line-height: 20px;
+}
+.html-element select {
+   position: absolute;
+   right: 2px;
+   bottom: 28px;
+}
+.html-element input {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   border: none;
+   color: #333;
+   padding: 5px;
+   height: 16px;
+}
+.html-element label {
+   color: #333;
+   text-shadow: 1px 0 0 lightgray;
+   font-weight: bold;
+}
+.html-element span {
+   position: absolute;
+   top: 2px;
+   right: 9px;
+   color: white;
+   font-size: 10px;
+}*/
+
+
+
+#board {
+    position: relative;
+    overflow: hidden;
+}
+
+#board svg {
+    height: 800px;
+    border: 1px solid #666;
+    /*background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGAwBuKzQIwXMBJSAJMfVUidcAQAnUQBC6jEGBUAAAAASUVORK5CYII=')}*/
+}
+#board .component {
+    position: absolute;
+    margin-left: 15px;
+    padding: 5px 15px 10px 15px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+
+    /* Make sure events are propagated to the JointJS element so, e.g. dragging works.*/
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+
+#board .component .element {
+    height: 70px;
+}
+
+#board .component .tools {
+    position: absolute;
+    width: 168px;
+    left: 0;
+    border-top: 1px solid #c1c1c1;
+    height: 22px;
+    background-color: #eee;
+}
+
+#board .component button, #board .component .create-link, #board .component .edit {
+    /* Enable interacting with inputs only. */
+    pointer-events: auto;
+}
+#board .component .edit {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 16px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+#board .component .create-link {
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    margin-left: -10px;
+    width: 16px;
+}
+
+#board .component .close {
+    position: absolute;
+    right: 5px;
+    top: -3px;
+    opacity: 1;
+}
+
+#board .component.binary {
+    background: #cccccc;
+}
+
+#result .generate, .modal-footer .btn-primary {
+    border: 1px solid #c1c1c1;;
+    background-color: #49ae80;
+    background-image: linear-gradient(to bottom,#4cb183 0,#49ae80 100%);
+}
+
+.modal-footer .btn-warning {
+    border: 1px solid #c1c1c1;;
+    background-color: #c1c1c1;
+    background-image: linear-gradient(to bottom,#dcdcdc 0,#c1c1c1 100%);
+}
+
+#result p {
+    padding: 0;
+    font-size: 18px;
+}
+
+#result p a {
+    color: #49ae80;
+}
+
+.popover {
+    width: 500px;
+}
+
+form .error {
+    color: red;
+    text-align: center;
+}
+
+.components.list-group {
+    box-shadow: none;
+    -webkit-box-shadow:none;
+    margin-left: 0;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.components .list-group-item.col-md-6 {
+    height: 70px;
+    width: 48%;
+    margin: 2px 3px 2px 0;
+}
+
+.componentsContainer {
+    position: relative;
+}
+
+.componentsContainer input {
+    border-top: none;
+    border-left: 1px solid #ddd;
+}
+
+.glyphicon-search {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 20px;
+    pointer-events: none;
+    font-size: 13px;
+}
+
+.component img {
+    margin-right: 10px;
+}
+
+.components .phpmyadmin {
+    font-size: 11px;
+}
+
+.component .element {
+    position: relative;
+    top: 50%;
+    padding: 5px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.component.fixed .element {
+    cursor: default!important;
+}
+
+.modal-content label {
+    padding-right: 10px;
+}
